@@ -1,0 +1,3 @@
+C:/Users/aitao/CLionProjects/prosto/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/aitao/CLionProjects/prosto/cmake-build-debug/CMakeFiles/prosto.dir
+C:/Users/aitao/CLionProjects/prosto/cmake-build-debug/CMakeFiles/rebuild_cache.dir
