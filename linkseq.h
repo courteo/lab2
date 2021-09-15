@@ -7,7 +7,7 @@
 
 
 template<class T>
-class LinkedSequence: Sequence<T> {
+class LinkedSequence: public Sequence<T> {
 private:
     Linked_List<T> Llst;
 public:
@@ -29,6 +29,12 @@ public:
         return *this;
     }
 
+    T &operator[](int index) {
+        if (index < 0 || index >= get_len())
+            throw IndexOutOfRange(get_len(), index);
+        return Llst[index];
+    }
+
     int get_len(){
         return Llst.get_len();
     }
@@ -43,6 +49,16 @@ public:
 
     LinkedSequence(const LinkedSequence<T> &list){
         Llst = list.Llst;
+    }
+
+    explicit LinkedSequence(Sequence<T> &sequence){
+        for (int i = 0; i < sequence.get_len(); i++) {
+            append(sequence[i]);
+        }
+    }
+
+    LinkedSequence(const Linked_List<T> &list){
+        Llst = list;
     }
 
     T get_first(){
@@ -103,7 +119,7 @@ public:
     int where(T item){
         for (int i = 0; i < this->Llst.get_len(); i++){
             //if (this->Llst.get_i(i) == item)
-                return i;
+            return i;
 
         }
         return -1;

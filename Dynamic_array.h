@@ -90,11 +90,9 @@ public:
 
 
     T get_i(int i) {
-        if (get_len() > i) {
-            return *(arr + i);
-        }
-        else
+        if (get_len() <= i || i < 0)
             throw IndexOutOfRange(get_len(), i);
+        return arr[i];
         //////////////////////
     }
 
@@ -116,9 +114,9 @@ public:
     }
 
     void resize(int newSize){
-       if (newSize < 0) throw IndexOutOfRange(get_len(), newSize);
+        if (newSize < 0) throw IndexOutOfRange(get_len(), newSize);
 
-       if (len == newSize) return;
+        if (len == newSize) return;
 
         if (newSize == 0) {;
             set_len(0);

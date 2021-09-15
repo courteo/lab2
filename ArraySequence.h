@@ -6,7 +6,7 @@
 #include <iostream>
 
 template<class T>
-class ArraySequence: Sequence<T> {
+class ArraySequence: public Sequence<T> {
 private:
     Dynamic_array<T> dynArr;
 public:
@@ -47,12 +47,23 @@ public:
 
     }
 
-    ArraySequence(int count, T* items) {
+    explicit ArraySequence(int count, T* items) {
         dynArr = Dynamic_array<T>(items, count);
     }
 
-    explicit ArraySequence(const Dynamic_array<T> &array) {
+    ArraySequence(const ArraySequence<T> &array) {
         dynArr = array.dynArr;
+    }
+
+    explicit ArraySequence(Sequence<T> &sequence) {
+//        dynArr = array.dynArr; TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        for (int i = 0; i < sequence.get_len(); i++) {
+            append(sequence[i]);
+        }
+    }
+
+    explicit ArraySequence(const Dynamic_array<T> &array) {
+        dynArr = array;
     }
 
     T get_first() {
@@ -66,7 +77,8 @@ public:
     }
 
     T get_i(int index) {
-        if (index < 0 || index >= dynArr.get_len()) throw IndexOutOfRange(get_len(), index);
+        if (index < 0 || index >= dynArr.get_len())
+            throw IndexOutOfRange(get_len(), index);
         return dynArr.get_i(index);
     }
 
@@ -154,10 +166,10 @@ public:
         return  this;
     }
 
-     int where(T item) {
+    int where(T item) {
         for (int i = 0; i < dynArr.get_len(); i++){
             //if (dynArr.get_i(i) == item) {
-                return i;
+            return i;
             //}
         }
         return -1;

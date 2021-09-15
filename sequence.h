@@ -6,7 +6,6 @@
 
 
 template <class T>
-
 class Sequence {
 public:
     class IndexOutOfRange{
@@ -22,6 +21,8 @@ public:
     virtual T get_last() = 0;
 
     virtual T get_i(int index) = 0;
+
+    virtual T& operator[](int index) = 0;
 
     virtual int get_len() = 0;
 
@@ -41,7 +42,7 @@ public:
 
 //    virtual Sequence<T> *split(int index) = 0;
 
-   // virtual Sequence<T>* zip(Sequence<T> sequence1, Sequence<T> sequence2) = 0;
+    // virtual Sequence<T>* zip(Sequence<T> sequence1, Sequence<T> sequence2) = 0;
 };
 
 #endif //PROSTO_SEQUENCE_H
